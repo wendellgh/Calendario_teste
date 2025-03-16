@@ -23,6 +23,7 @@ export class AppComponent {
       interactionPlugin
     ],
     locale: localePtBr,
+    contentHeight: 500,
 
   })
 

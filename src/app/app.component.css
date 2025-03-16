@@ -1,5 +1,7 @@
-
-
+/* 
+*{
+    width: 100%;
+}
 .calendar {
     position: absolute;
     right: 5%;
@@ -7,7 +9,50 @@
     height: 50%;
     justify-content: flex-end;
     top: 5%;
-    
+    text-transform: capitalize;
+   
     }
 
-   
+.lista{
+    width:200px;
+    } */
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden; /* Evita barras de rolagem */
+    }
+    
+    .container {
+        display: grid;
+        grid-template-columns: 1fr 2fr; /* Ajuste as proporções conforme necessário */
+        height: 80vh; /* Garante que o contêiner ocupe certa proporção da tela */
+    }
+    
+    .lista {
+        background-color: #f4f4f4; /* Cor de fundo para a lista */
+        padding: 10px;
+        overflow-y: auto; /* Permite rolagem vertical se necessário */
+    }
+    
+    .lista ul {
+        list-style-type: none;
+        padding: 0;
+    }
+    
+    .lista ul li {
+        margin: 10px 0;
+    }
+    
+    .calendar section{
+        padding: 20px;
+        padding-bottom: 0px;
+        background-color: #fff; /* Cor de fundo para o calendário */
+        height: 100%; /* Garante que o calendário ocupe toda a altura disponível */
+        box-sizing: border-box;
+      
+    }
+    
+    h2 {
+        margin: 0;
+    }

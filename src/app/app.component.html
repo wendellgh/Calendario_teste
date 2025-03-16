@@ -1,14 +1,18 @@
-<div>
-  <h3>Calendario - Wendell</h3>
-</div>
-<div>
-  <ul>
-    <li>1</li>
-    <li>2</li>
-    <li>3</li>
-    <li>4</li>
-  </ul>
-</div>
-<div class="calendar">
-  <full-calendar [options]="calendarOptions()"></full-calendar>
+<header>
+  <h2>Calendario - Wendell</h2>
+</header>
+
+<div class="container">
+  <nav class="lista">
+    <ul>
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+    </ul>
+  </nav>
+
+  <section class="calendar">
+    <full-calendar [options]="calendarOptions()"></full-calendar>
+  </section>
 </div>
