@@ -13,3 +13,8 @@
         text-align: center;
         color: #333;
     }
+
+    ul{
+        list-style-type:none; ;
+        text-decoration: none;   
+    }
