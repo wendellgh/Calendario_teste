@@ -6,7 +6,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
 // import timeGridPlugin from '@fullcalendar/timegrid';
 // import listPlugin from '@fullcalendar/list';
-
+import localePtBr from '@fullcalendar/core/locales/pt-br'
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -17,15 +17,17 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 export class AppComponent {
   title = 'Calendario_teste';
   calendarVisible = true;
-  calendarOptions = signal<CalendarOptions> ({
-  plugins: [
-    dayGridPlugin,
-    interactionPlugin],
-  
+  calendarOptions = signal<CalendarOptions>({
+    plugins: [
+      dayGridPlugin,
+      interactionPlugin
+    ],
+    locale: localePtBr,
+
   })
 
-handleDateClick(){
-  alert('date click! ')
-}
+  handleDateClick() {
+    alert('date click! ')
+  }
 
 }
