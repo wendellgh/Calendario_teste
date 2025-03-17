@@ -1,21 +1,4 @@
-/* 
-*{
-    width: 100%;
-}
-.calendar {
-    position: absolute;
-    right: 5%;
-    width: 50%;
-    height: 50%;
-    justify-content: flex-end;
-    top: 5%;
-    text-transform: capitalize;
-   
-    }
 
-.lista{
-    width:200px;
-    } */
     html, body {
         height: 100%;
         margin: 0;
@@ -33,6 +16,7 @@
         background-color: #f4f4f4; /* Cor de fundo para a lista */
         padding: 10px;
         overflow-y: auto; /* Permite rolagem vertical se necessário */
+       
     }
     
     .lista ul {

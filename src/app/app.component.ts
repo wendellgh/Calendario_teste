@@ -28,7 +28,7 @@ export class AppComponent {
     headerToolbar: {
       left: 'prev,next today',
       center: 'title',
-      right:'timeGridWeek, timeGridDay'
+      right:'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
       
     },
 
