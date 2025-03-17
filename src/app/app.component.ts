@@ -4,9 +4,10 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import { CalendarOptions } from '@fullcalendar/core/index.js';
 import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
-// import timeGridPlugin from '@fullcalendar/timegrid';
-// import listPlugin from '@fullcalendar/list';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import listPlugin from '@fullcalendar/list';
 import localePtBr from '@fullcalendar/core/locales/pt-br'
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -21,7 +22,9 @@ export class AppComponent {
     initialView: 'dayGridMonth',
     plugins: [
       dayGridPlugin,
-      interactionPlugin
+      interactionPlugin,
+      timeGridPlugin,
+      listPlugin
     ],
     locale: localePtBr,
     contentHeight: 500,
