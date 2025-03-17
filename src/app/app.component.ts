@@ -18,12 +18,19 @@ export class AppComponent {
   title = 'Calendario_teste';
   calendarVisible = true;
   calendarOptions = signal<CalendarOptions>({
+    initialView: 'dayGridMonth',
     plugins: [
       dayGridPlugin,
       interactionPlugin
     ],
     locale: localePtBr,
     contentHeight: 500,
+    headerToolbar: {
+      left: 'prev,next today',
+      center: 'title',
+      right:'timeGridWeek, timeGridDay'
+      
+    },
 
   })
 
