@@ -15,6 +15,7 @@ import localePtBr from '@fullcalendar/core/locales/pt-br'
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
+
 export class AppComponent {
   title = 'Calendario_teste';
   calendarVisible = true;
@@ -31,14 +32,19 @@ export class AppComponent {
     headerToolbar: {
       left: 'prev,next today',
       center: 'title',
-      right:'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
-      
+      right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+
     },
+    dateClick: (arg) => this.handleDateClick(arg),
+    events: [
+      { title: 'event 1', date: '2021-06-01' },
+      { title: 'event 2', date: '2021-06-02' }
+    ]
 
   })
 
-  handleDateClick() {
-    alert('date click! ')
+  handleDateClick(arg:any) {
+    alert('date click! ' + arg.dateStr)
   }
 
 }
