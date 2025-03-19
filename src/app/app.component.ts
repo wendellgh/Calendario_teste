@@ -7,6 +7,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 import localePtBr from '@fullcalendar/core/locales/pt-br'
+import { log } from 'node:console';
 
 @Component({
   selector: 'app-root',
@@ -29,22 +30,21 @@ export class AppComponent {
     ],
     locale: localePtBr,
     contentHeight: 500,
+    selectable: true,
     headerToolbar: {
       left: 'prev,next today',
       center: 'title',
       right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
 
     },
-    dateClick: (arg) => this.handleDateClick(arg),
-    events: [
-      { title: 'event 1', date: '2021-06-01' },
-      { title: 'event 2', date: '2021-06-02' }
-    ]
+
+
+    select: this.handleDateSelect.bind(this)
 
   })
 
-  handleDateClick(arg:any) {
-    alert('date click! ' + arg.dateStr)
+  handleDateSelect(arg: any) {
+    console.log("Chamada da Função handleDateSelect. Aqui criar um novo componente para abrir uma janela. Seria o Modal?")
   }
 
 }
