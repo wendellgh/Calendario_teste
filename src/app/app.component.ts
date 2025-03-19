@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, ViewChild, viewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { CalendarOptions } from '@fullcalendar/core/index.js';
@@ -7,17 +7,22 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 import localePtBr from '@fullcalendar/core/locales/pt-br'
-import { log } from 'node:console';
+
+import { ModalComponent } from './Modal/modal.component';
+
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, FullCalendarModule],
+  imports: [RouterOutlet, FullCalendarModule, ModalComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 
 export class AppComponent {
+
+  @ViewChild(ModalComponent) modalComponent!: ModalComponent;
+
   title = 'Calendario_teste';
   calendarVisible = true;
   calendarOptions = signal<CalendarOptions>({
@@ -45,6 +50,13 @@ export class AppComponent {
 
   handleDateSelect(arg: any) {
     console.log("Chamada da Função handleDateSelect. Aqui criar um novo componente para abrir uma janela. Seria o Modal?")
+    if (this.modalComponent) {
+      this.modalComponent.openModal();
+    } else {
+      console.warn("ModalComponent não foi encontrado")
+    }
+
+
   }
 
 }

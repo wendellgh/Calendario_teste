@@ -1,0 +1,21 @@
+.modal {
+    position: fixed;
+    top: 30%;
+    left: 35%;
+    width: 30%;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 20px;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    border-radius: 8px;
+  }
+  
+  .modal h2 {
+    margin-top: 0;
+  }
+  
+  .modal button {
+    margin-right: 10px;
+  }
+  
