@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { DateSelectArg } from '@fullcalendar/core/index.js';
+import { INITIAL_EVENTS, createEventId } from '../event-utils';
 
 @Component({
   selector: 'app-modal',
@@ -15,23 +17,39 @@ export class ModalComponent {
 
   ngOnInit() {
   }
+
+
   isVisible = false;
-  public openModal() {
-    this.isVisible = true; 
+
+
+  public openModal(selectInfo: DateSelectArg) {
+    this.isVisible = true;
+    const title = prompt('');
     console.log("Modal aberto");
-  }
 
-  closeModal() {
-    this.isVisible = false; 
-    console.log("Modal fechado");
-  }
+    const calendarApi = selectInfo.view.calendar;
+    calendarApi.addEvent({
+      id: createEventId(),
+      start: selectInfo.startStr,
+      end: selectInfo.endStr,
+      allDay: selectInfo.allDay
 
-  save() {
-    console.log("Salvando dados");
-  }
+    })
 
-  cancel() {
-    console.log("Cancelando");
-  }
 
+
+    // closeModal() {
+    //   this.isVisible = false;
+    //   console.log("Modal fechado");
+    // }
+
+    // save() {
+    //   console.log("Salvando dados");
+    // }
+
+    //   cancel() {
+    //   console.log("Cancelando");
+    // }
+
+  }
 }

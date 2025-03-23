@@ -9,6 +9,7 @@ import listPlugin from '@fullcalendar/list';
 import localePtBr from '@fullcalendar/core/locales/pt-br'
 
 import { ModalComponent } from './Modal/modal.component';
+import { INITIAL_EVENTS, createEventId } from './event-utils';
 
 
 @Component({
