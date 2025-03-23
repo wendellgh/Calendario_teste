@@ -22,34 +22,23 @@ export class ModalComponent {
   isVisible = false;
 
 
-  public openModal(selectInfo: DateSelectArg) {
+  public openModal() {
     this.isVisible = true;
-    const title = prompt('');
+
     console.log("Modal aberto");
 
-    const calendarApi = selectInfo.view.calendar;
-    calendarApi.addEvent({
-      id: createEventId(),
-      start: selectInfo.startStr,
-      end: selectInfo.endStr,
-      allDay: selectInfo.allDay
+  }
 
-    })
+  closeModal() {
+    this.isVisible = false;
+    console.log("Modal fechado");
+  }
 
+  save() {
+    console.log("Salvando dados");
+  }
 
-
-    // closeModal() {
-    //   this.isVisible = false;
-    //   console.log("Modal fechado");
-    // }
-
-    // save() {
-    //   console.log("Salvando dados");
-    // }
-
-    //   cancel() {
-    //   console.log("Cancelando");
-    // }
-
+  cancel() {
+    console.log("Cancelando");
   }
 }

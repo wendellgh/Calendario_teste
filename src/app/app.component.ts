@@ -10,6 +10,7 @@ import localePtBr from '@fullcalendar/core/locales/pt-br'
 
 import { ModalComponent } from './Modal/modal.component';
 import { INITIAL_EVENTS, createEventId } from './event-utils';
+import { DateSelectArg, EventClickArg, EventApi } from '@fullcalendar/core';
 
 
 @Component({
@@ -26,6 +27,8 @@ export class AppComponent {
 
   title = 'Calendario_teste';
   calendarVisible = true;
+
+
   calendarOptions = signal<CalendarOptions>({
     initialView: 'dayGridMonth',
     plugins: [
@@ -49,13 +52,27 @@ export class AppComponent {
 
   })
 
-  handleDateSelect(arg: any) {
+  handleDateSelect(selectInfo: DateSelectArg) {
     console.log("Chamada da Função handleDateSelect. Aqui criar um novo componente para abrir uma janela. Seria o Modal?")
     if (this.modalComponent) {
+
+
+      const calendarApi = selectInfo.view.calendar;
+
+      calendarApi.addEvent({
+        id: createEventId(),
+        start: selectInfo.startStr,
+        end: selectInfo.endStr,
+        allDay: selectInfo.allDay
+      })
+      console.log(
+        calendarApi
+      )
       this.modalComponent.openModal();
     } else {
       console.warn("ModalComponent não foi encontrado")
     }
+
 
 
   }
