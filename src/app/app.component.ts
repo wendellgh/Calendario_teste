@@ -69,12 +69,18 @@ export class AppComponent {
         calendarApi
       )
       this.modalComponent.openModal();
+
     } else {
       console.warn("ModalComponent não foi encontrado")
     }
 
-
-
   }
+
+  handleEventClick(clickInfo: EventClickArg) {
+    if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
+      clickInfo.event.remove();
+    }
+  }
+
 
 }
