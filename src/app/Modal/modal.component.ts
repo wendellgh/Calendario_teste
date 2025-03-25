@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DateSelectArg } from '@fullcalendar/core/index.js';
 import { INITIAL_EVENTS, createEventId } from '../event-utils';
@@ -18,6 +18,7 @@ export class ModalComponent {
   ngOnInit() {
   }
 
+  @Input() Teste!: any
 
   isVisible = false;
 
@@ -26,6 +27,7 @@ export class ModalComponent {
     this.isVisible = true;
 
     console.log("Modal aberto");
+    console.log(this.Teste);
 
   }
 

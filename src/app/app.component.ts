@@ -59,25 +59,14 @@ export class AppComponent {
 
       const calendarApi = selectInfo.view.calendar;
 
-      calendarApi.addEvent({
+      const paramsCalendar = calendarApi.addEvent({
         id: createEventId(),
         start: selectInfo.startStr,
         end: selectInfo.endStr,
         allDay: selectInfo.allDay
       })
-      // console.log(calendarApi);
-      // console.log(Object.keys(calendarApi));
-      // console.log(calendarApi);
-      
 
-      const currentData = (calendarApi as any).currentData;
-      if (currentData) {
-        console.log('viewTitle:', currentData.viewTitle);
-      } else {
-        console.log('currentData está undefined');
-      }
-
-
+      console.log(paramsCalendar?.startStr)
 
 
       this.modalComponent.openModal();
@@ -93,6 +82,4 @@ export class AppComponent {
       clickInfo.event.remove();
     }
   }
-
-
 }
