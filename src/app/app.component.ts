@@ -65,9 +65,21 @@ export class AppComponent {
         end: selectInfo.endStr,
         allDay: selectInfo.allDay
       })
-      console.log(
-        calendarApi
-      )
+      // console.log(calendarApi);
+      // console.log(Object.keys(calendarApi));
+      // console.log(calendarApi);
+      
+
+      const currentData = (calendarApi as any).currentData;
+      if (currentData) {
+        console.log('viewTitle:', currentData.viewTitle);
+      } else {
+        console.log('currentData está undefined');
+      }
+
+
+
+
       this.modalComponent.openModal();
 
     } else {
