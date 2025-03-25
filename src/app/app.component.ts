@@ -67,6 +67,7 @@ export class AppComponent {
       })
       console.log(
         calendarApi
+        
       )
       this.modalComponent.openModal();
 
