@@ -1,6 +1,9 @@
 <div class="modal" *ngIf="isVisible">
     <h2>Modal Aberto</h2>
-    <p></p>
+    <p><strong>Id:</strong> {{ eventData?.id }}</p>
+    <p><strong>Início:</strong> {{ eventData?.startStr }}</p>
+    <p><strong>Fim:</strong> {{ eventData?.endStr }}</p>
+    <p><strong>All Day:</strong> {{ eventData?.allDay }}</p>
     <button (click)="save()">Salvar</button>
     <button (click)="cancel()">Cancelar</button>
     <button (click)="closeModal()">Fechar</button>

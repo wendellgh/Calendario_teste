@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DateSelectArg } from '@fullcalendar/core/index.js';
 import { INITIAL_EVENTS, createEventId } from '../event-utils';
@@ -12,12 +12,12 @@ import { INITIAL_EVENTS, createEventId } from '../event-utils';
 })
 export class ModalComponent {
 
-
   constructor() { }
 
   ngOnInit() {
   }
 
+  @Input() eventData!:any;
 
   isVisible = false;
 
@@ -26,6 +26,7 @@ export class ModalComponent {
     this.isVisible = true;
 
     console.log("Modal aberto");
+    console.log("Vindo do filho " + this.eventData.startStr);
 
   }
 

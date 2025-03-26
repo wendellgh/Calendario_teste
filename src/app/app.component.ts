@@ -11,6 +11,7 @@ import localePtBr from '@fullcalendar/core/locales/pt-br'
 import { ModalComponent } from './Modal/modal.component';
 import { INITIAL_EVENTS, createEventId } from './event-utils';
 import { DateSelectArg, EventClickArg, EventApi } from '@fullcalendar/core';
+import { log } from 'console';
 
 
 @Component({
@@ -53,32 +54,18 @@ export class AppComponent {
   })
 
   handleDateSelect(selectInfo: DateSelectArg) {
-    console.log("Chamada da Função handleDateSelect. Aqui criar um novo componente para abrir uma janela. Seria o Modal?")
     if (this.modalComponent) {
-
 
       const calendarApi = selectInfo.view.calendar;
 
-      calendarApi.addEvent({
+      const newEvent = calendarApi.addEvent({
         id: createEventId(),
         start: selectInfo.startStr,
         end: selectInfo.endStr,
         allDay: selectInfo.allDay
       })
-      // console.log(calendarApi);
-      // console.log(Object.keys(calendarApi));
-      // console.log(calendarApi);
-      
 
-      const currentData = (calendarApi as any).currentData;
-      if (currentData) {
-        console.log('viewTitle:', currentData.viewTitle);
-      } else {
-        console.log('currentData está undefined');
-      }
-
-
-
+      this.modalComponent.eventData = newEvent;
 
       this.modalComponent.openModal();
 
