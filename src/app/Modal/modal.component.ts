@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DateSelectArg } from '@fullcalendar/core/index.js';
 import { INITIAL_EVENTS, createEventId } from '../event-utils';
+import { StartupSnapshot } from 'v8';
 
 @Component({
   selector: 'app-modal',
@@ -17,17 +18,25 @@ export class ModalComponent {
   ngOnInit() {
   }
 
-  @Input() eventData!:any;
+  @Input() eventData!: any;
 
   isVisible = false;
+  dataInicial!: string;
+  dataFinal!: string;
+
+
+  transformData() {
+
+  }
+
 
 
   public openModal() {
     this.isVisible = true;
-
-    console.log("Modal aberto");
-    console.log("Vindo do filho " + this.eventData.startStr);
-
+    if (this.eventData && this.eventData.startStr) {
+      this.dataInicial = this.eventData.startStr.replace(/^(\d{4})-(\d{2})-(\d{2})$/, '$3/$2/$1');
+      this.dataFinal = this.eventData.endStr.replace(/^(\d{4})-(\d{2})-(\d{2})$/, '$3/$2/$1');
+    }
   }
 
   closeModal() {
