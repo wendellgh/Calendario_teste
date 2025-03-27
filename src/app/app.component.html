@@ -10,6 +10,10 @@
       <li>2</li>
       <li>3</li>
       <li>4</li>
+      <li *ngFor="let event of events">
+        <p>{{event.title}}</p>
+        <p>{{event.start}}</p>
+      </li>
     </ul>
   </nav>
 
