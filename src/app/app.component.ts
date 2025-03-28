@@ -58,11 +58,12 @@ export class AppComponent {
 
   handleDateSelect(selectInfo: DateSelectArg) {
     if (this.modalComponent) {
-
+      const title1 = 'WEndelllll';
       const calendarApi = selectInfo.view.calendar;
 
       const newEvent = calendarApi.addEvent({
         id: createEventId(),
+        title: title1,
         start: selectInfo.startStr,
         end: selectInfo.endStr,
         allDay: selectInfo.allDay
@@ -81,7 +82,8 @@ export class AppComponent {
       // Salva o array atualizado no localStorage
       localStorage.setItem('events', JSON.stringify(INITIAL_EVENTS));
 
-      console.log(INITIAL_EVENTS)
+      console.log(typeof(eventToSave))
+      console.log(typeof(newEvent))
 
 
       this.modalComponent.eventData = newEvent;

@@ -1,7 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { FormsModule } from '@angular/forms';
+
+import { INITIAL_EVENTS } from '../event-utils';
 
 @Component({
   selector: 'app-modal',
@@ -22,13 +23,7 @@ export class ModalComponent {
   isVisible = false;
   dataInicial!: string;
   dataFinal!: string;
-
-
-  transformData() {
-
-  }
-
-
+  tituloEvento!: string;
 
   public openModal() {
     this.isVisible = true;
@@ -36,6 +31,8 @@ export class ModalComponent {
       this.dataInicial = this.eventData.startStr.replace(/^(\d{4})-(\d{2})-(\d{2})$/, '$3/$2/$1');
       this.dataFinal = this.eventData.endStr.replace(/^(\d{4})-(\d{2})-(\d{2})$/, '$3/$2/$1');
     }
+
+    
   }
 
   closeModal() {
@@ -43,8 +40,10 @@ export class ModalComponent {
     console.log("Modal fechado");
   }
 
+
   save() {
-    console.log("Salvando dados");
+     
+    this.closeModal();
   }
 
   cancel() {
