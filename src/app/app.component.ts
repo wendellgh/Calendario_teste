@@ -11,13 +11,14 @@ import localePtBr from '@fullcalendar/core/locales/pt-br'
 import { ModalComponent } from './Modal/modal.component';
 import { INITIAL_EVENTS, createEventId } from './event-utils';
 import { DateSelectArg, EventClickArg, EventApi } from '@fullcalendar/core';
-import { log } from 'console';
+import { CommonModule } from '@angular/common';
+
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, FullCalendarModule, ModalComponent],
+  imports: [RouterOutlet, FullCalendarModule, ModalComponent,CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -25,6 +26,8 @@ import { log } from 'console';
 export class AppComponent {
 
   @ViewChild(ModalComponent) modalComponent!: ModalComponent;
+
+  events = INITIAL_EVENTS;
 
   title = 'Calendario_teste';
   calendarVisible = true;
@@ -55,15 +58,33 @@ export class AppComponent {
 
   handleDateSelect(selectInfo: DateSelectArg) {
     if (this.modalComponent) {
-
+      const title1 = 'WEndelllll';
       const calendarApi = selectInfo.view.calendar;
 
       const newEvent = calendarApi.addEvent({
         id: createEventId(),
+        title: title1,
         start: selectInfo.startStr,
         end: selectInfo.endStr,
         allDay: selectInfo.allDay
       })
+
+      const eventToSave = {
+        id: newEvent?.id || '',
+        title: newEvent?.title || 'Novo Evento',
+        start: newEvent?.startStr,
+        end: newEvent?.endStr,
+        allDay: newEvent?.allDay
+      };
+
+      INITIAL_EVENTS.push(eventToSave);
+
+      // Salva o array atualizado no localStorage
+      localStorage.setItem('events', JSON.stringify(INITIAL_EVENTS));
+
+      console.log(typeof(eventToSave))
+      console.log(typeof(newEvent))
+
 
       this.modalComponent.eventData = newEvent;
 

@@ -4,6 +4,12 @@
     <p><strong>Início:</strong> {{ dataInicial }}</p>
     <p><strong>Fim:</strong> {{ dataFinal }}</p>
     <p><strong>All Day:</strong> {{ eventData?.allDay }}</p>
+    <p>Evento o dia inteiro? 
+        <input type="checkbox">
+    </p>
+    <p>Titulo: 
+        <input type="text" placeholder="Titulo da Tarefa: " [(ngModel)]="tituloEvento">
+    </p>
     <button (click)="save()">Salvar</button>
     <button (click)="cancel()">Cancelar</button>
     <button (click)="closeModal()">Fechar</button>
