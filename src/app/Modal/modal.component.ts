@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input,Output , EventEmitter} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -19,11 +19,12 @@ export class ModalComponent {
   }
 
   @Input() eventData!: any;
+  @Output() onClose = new EventEmitter<string>();
 
   isVisible = false;
   dataInicial!: string;
   dataFinal!: string;
-  tituloEvento!: string;
+  title: string ='';
 
   public openModal() {
     this.isVisible = true;
@@ -32,12 +33,15 @@ export class ModalComponent {
       this.dataFinal = this.eventData.endStr.replace(/^(\d{4})-(\d{2})-(\d{2})$/, '$3/$2/$1');
     }
 
-    
+    this.title = this.eventData?.title || '';
+  
   }
 
   closeModal() {
     this.isVisible = false;
+    this.onClose.emit(this.title);
     console.log("Modal fechado");
+    console.log(INITIAL_EVENTS)
   }
 
 

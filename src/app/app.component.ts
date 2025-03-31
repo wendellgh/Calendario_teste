@@ -18,7 +18,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, FullCalendarModule, ModalComponent,CommonModule],
+  imports: [RouterOutlet, FullCalendarModule, ModalComponent, CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -58,12 +58,11 @@ export class AppComponent {
 
   handleDateSelect(selectInfo: DateSelectArg) {
     if (this.modalComponent) {
-      const title1 = 'WEndelllll';
       const calendarApi = selectInfo.view.calendar;
 
       const newEvent = calendarApi.addEvent({
         id: createEventId(),
-        title: title1,
+        title: '',
         start: selectInfo.startStr,
         end: selectInfo.endStr,
         allDay: selectInfo.allDay
@@ -78,17 +77,30 @@ export class AppComponent {
       };
 
       INITIAL_EVENTS.push(eventToSave);
-
-      // Salva o array atualizado no localStorage
       localStorage.setItem('events', JSON.stringify(INITIAL_EVENTS));
 
-      console.log(typeof(eventToSave))
-      console.log(typeof(newEvent))
-
-
-      this.modalComponent.eventData = newEvent;
-
+      this.modalComponent.eventData = {...newEvent};
       this.modalComponent.openModal();
+
+      this.modalComponent.onClose.subscribe((updatedTitle: string) => {
+        if (updatedTitle) {
+          // Atualiza o título do evento no calendário
+          newEvent!.setProp('title', updatedTitle);
+  
+          // Atualiza o título no array de eventos
+          const eventIndex = INITIAL_EVENTS.findIndex(event => event.id === newEvent!.id);
+          if (eventIndex !== -1) {
+            INITIAL_EVENTS[eventIndex] = {
+              ...INITIAL_EVENTS[eventIndex],
+              title: updatedTitle
+            };
+          }
+  
+          // Atualiza o evento no localStorage
+          localStorage.setItem('events', JSON.stringify(INITIAL_EVENTS));
+          console.log('Evento atualizado:', INITIAL_EVENTS[eventIndex]);
+        }
+      });
 
     } else {
       console.warn("ModalComponent não foi encontrado")
