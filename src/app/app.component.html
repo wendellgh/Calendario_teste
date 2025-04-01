@@ -9,8 +9,11 @@
       <li>1</li>
       <li>2</li>
       <li>3</li>
-      <li>4</li>
-      <li *ngFor="let event of events">
+      <li>4
+        <app-modal (envio)="recebedofilho($event)"></app-modal>
+        {{nomeRecebido}}
+      </li>
+      <li *ngFor="let event of eventsList">
         <p>{{event.title}}</p>
         <p>{{event.start}}</p>
       </li>
@@ -18,8 +21,11 @@
   </nav>
 
   <section class="calendar">
-    <full-calendar [options]="calendarOptions()"></full-calendar>
+    <full-calendar [options]="calendarOptions()">
+    </full-calendar>
   </section>
+
+  
 </div>
 
 <app-modal [eventData] = "handleDateSelect"></app-modal>

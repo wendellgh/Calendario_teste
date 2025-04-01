@@ -1,4 +1,4 @@
-import { Component, signal, ViewChild, viewChild } from '@angular/core';
+import { Component, signal, ViewChild, viewChild, ChangeDetectorRef } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { CalendarOptions } from '@fullcalendar/core/index.js';
@@ -27,10 +27,15 @@ export class AppComponent {
 
   @ViewChild(ModalComponent) modalComponent!: ModalComponent;
 
-  events = INITIAL_EVENTS;
+  eventsList = INITIAL_EVENTS;
 
   title = 'Calendario_teste';
   calendarVisible = true;
+  nomeRecebido: string = "";
+
+  currentEvents = signal<EventApi[]>([]);
+
+  constructor(private changeDetector: ChangeDetectorRef) { }
 
 
   calendarOptions = signal<CalendarOptions>({
@@ -48,8 +53,8 @@ export class AppComponent {
       left: 'prev,next today',
       center: 'title',
       right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
-
     },
+    events: INITIAL_EVENTS,
 
 
     select: this.handleDateSelect.bind(this)
@@ -57,12 +62,15 @@ export class AppComponent {
   })
 
   handleDateSelect(selectInfo: DateSelectArg) {
+    console.log("Evento criado")
+
+
     if (this.modalComponent) {
       const calendarApi = selectInfo.view.calendar;
 
       const newEvent = calendarApi.addEvent({
         id: createEventId(),
-        title: '',
+        title: this.nomeRecebido || '',
         start: selectInfo.startStr,
         end: selectInfo.endStr,
         allDay: selectInfo.allDay
@@ -70,37 +78,20 @@ export class AppComponent {
 
       const eventToSave = {
         id: newEvent?.id || '',
-        title: newEvent?.title || 'Novo Evento',
+        title: newEvent?.title || this.nomeRecebido,
         start: newEvent?.startStr,
         end: newEvent?.endStr,
         allDay: newEvent?.allDay
       };
 
       INITIAL_EVENTS.push(eventToSave);
-      localStorage.setItem('events', JSON.stringify(INITIAL_EVENTS));
+      console.log(INITIAL_EVENTS)
 
-      this.modalComponent.eventData = {...newEvent};
+
+      this.modalComponent.eventData = eventToSave;
       this.modalComponent.openModal();
 
-      this.modalComponent.onClose.subscribe((updatedTitle: string) => {
-        if (updatedTitle) {
-          // Atualiza o título do evento no calendário
-          newEvent!.setProp('title', updatedTitle);
-  
-          // Atualiza o título no array de eventos
-          const eventIndex = INITIAL_EVENTS.findIndex(event => event.id === newEvent!.id);
-          if (eventIndex !== -1) {
-            INITIAL_EVENTS[eventIndex] = {
-              ...INITIAL_EVENTS[eventIndex],
-              title: updatedTitle
-            };
-          }
-  
-          // Atualiza o evento no localStorage
-          localStorage.setItem('events', JSON.stringify(INITIAL_EVENTS));
-          console.log('Evento atualizado:', INITIAL_EVENTS[eventIndex]);
-        }
-      });
+
 
     } else {
       console.warn("ModalComponent não foi encontrado")
@@ -112,5 +103,14 @@ export class AppComponent {
     if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
       clickInfo.event.remove();
     }
+  }
+
+  recebedofilho(nome: string) {
+    this.nomeRecebido = nome;
+  }
+
+  handleEvents(events: EventApi[]) {
+    this.currentEvents.set(events);
+    this.changeDetector.detectChanges();
   }
 }
