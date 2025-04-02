@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { INITIAL_EVENTS } from '../event-utils';
+import { INITIAL_EVENTS,  } from '../event-utils';
 
 @Component({
   selector: 'app-modal',
@@ -16,6 +16,7 @@ export class ModalComponent {
   constructor() { }
 
   ngOnInit() {
+   
   }
 
   @Input() eventData!: any; //Posso criar uma classe e depois tipar para essa classe???
@@ -38,15 +39,15 @@ export class ModalComponent {
 
     this.meunome();
 
+    
 
   }
 
   closeModal() {
     this.isVisible = false;
     console.log("Modal fechado");
-  
-    localStorage.setItem('events', JSON.stringify(INITIAL_EVENTS));
     console.log(INITIAL_EVENTS)
+  
   }
 
 
@@ -63,7 +64,7 @@ export class ModalComponent {
     }
 
     console.log(this.title2 + " dps")
-    // Reseta o título para vazio após salvar
+   // Reseta o título para vazio após salvar
     this.title2 = '';
     this.meunome();
     this.closeModal();
@@ -76,4 +77,5 @@ export class ModalComponent {
   meunome() {
     this.envio.emit(this.title2)
   }
+
 }

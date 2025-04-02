@@ -32,10 +32,15 @@ export class AppComponent {
   title = 'Calendario_teste';
   calendarVisible = true;
   nomeRecebido: string = "";
+  
 
   currentEvents = signal<EventApi[]>([]);
 
-  constructor(private changeDetector: ChangeDetectorRef) { }
+  constructor(private changeDetector: ChangeDetectorRef) {}
+  
+  ngOnInit(){
+  
+  }
 
 
   calendarOptions = signal<CalendarOptions>({
@@ -55,19 +60,14 @@ export class AppComponent {
       right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
     },
     events: INITIAL_EVENTS,
-
-
     select: this.handleDateSelect.bind(this)
 
   })
-
+  
   handleDateSelect(selectInfo: DateSelectArg) {
-    console.log("Evento criado")
-
-
-    if (this.modalComponent) {
+    
       const calendarApi = selectInfo.view.calendar;
-
+  
       const newEvent = calendarApi.addEvent({
         id: createEventId(),
         title: this.nomeRecebido || '',
@@ -85,18 +85,10 @@ export class AppComponent {
       };
 
       INITIAL_EVENTS.push(eventToSave);
-      console.log(INITIAL_EVENTS)
-
-
       this.modalComponent.eventData = eventToSave;
+      localStorage.setItem('events', JSON.stringify(INITIAL_EVENTS));
       this.modalComponent.openModal();
-
-
-
-    } else {
-      console.warn("ModalComponent não foi encontrado")
-    }
-
+    
   }
 
   handleEventClick(clickInfo: EventClickArg) {
@@ -112,5 +104,9 @@ export class AppComponent {
   handleEvents(events: EventApi[]) {
     this.currentEvents.set(events);
     this.changeDetector.detectChanges();
+  
   }
+
+  
+  
 }

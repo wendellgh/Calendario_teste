@@ -7,28 +7,38 @@ export const INITIAL_EVENTS: EventInput[] = [
   {
     id: createEventId(),
     title: 'All-day event',
-    start: TODAY_STR
+    start: '2025-04-27'
   },
   {
     id: createEventId(),
-    title: 'Timed event',
-    start: TODAY_STR + ' T00:00:00',
-    end: TODAY_STR + 'T03:00:00'
+    title: 'Criar Template',
+    start: '2025-04-13',
+   
   },
   {
     id: createEventId(),
-    title: 'Timed event',
-    start: TODAY_STR + ' T12:00:00',
-    end: TODAY_STR + ' T15:00:00'
+    title: 'Eventos?',
+    start: TODAY_STR + 'T12:00:00',
+    end: TODAY_STR + 'T15:00:00'
   },
   {
     id: createEventId(),
     title: 'Meu Teste',
-    start:'2025-04-02',
-    end:'2025-04-02'
+    start:'2025-04-11',
+    end:'2025-04-12'
+  },
+  {
+    id: createEventId(),
+    title: 'Wendell M.',
+    start:'2025-04-30',
+    end:'2025-04-30'
   }
 ];
 
 export function createEventId() {
   return String(eventGuid++);
 }
+
+
+
+
