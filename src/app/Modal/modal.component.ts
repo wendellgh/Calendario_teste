@@ -1,8 +1,9 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, viewChild, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { INITIAL_EVENTS,  } from '../event-utils';
+
 
 @Component({
   selector: 'app-modal',
@@ -20,6 +21,8 @@ export class ModalComponent {
   }
 
   @Input() eventData!: any; //Posso criar uma classe e depois tipar para essa classe???
+  @Input() calendarApi!: any;
+ 
 
 
   isVisible = false;
@@ -37,15 +40,15 @@ export class ModalComponent {
       this.dataFinal = this.eventData.end.replace(/^(\d{4})-(\d{2})-(\d{2})$/, '$3/$2/$1');
     }
 
-    this.meunome();
-
-    
+    this.meunome();   
 
   }
 
   closeModal() {
     this.isVisible = false;
     console.log("Modal fechado");
+    localStorage.setItem('events', JSON.stringify(INITIAL_EVENTS));
+    this.calendarApi.get;
     console.log(INITIAL_EVENTS)
   
   }

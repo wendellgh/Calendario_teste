@@ -60,14 +60,16 @@ export class AppComponent {
       right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
     },
     events: INITIAL_EVENTS,
-    select: this.handleDateSelect.bind(this)
+    select: this.handleDateSelect.bind(this),
+
 
   })
   
   handleDateSelect(selectInfo: DateSelectArg) {
     
+      
       const calendarApi = selectInfo.view.calendar;
-  
+      
       const newEvent = calendarApi.addEvent({
         id: createEventId(),
         title: this.nomeRecebido || '',
@@ -86,8 +88,9 @@ export class AppComponent {
 
       INITIAL_EVENTS.push(eventToSave);
       this.modalComponent.eventData = eventToSave;
-      localStorage.setItem('events', JSON.stringify(INITIAL_EVENTS));
+      this.modalComponent.calendarApi = calendarApi;
       this.modalComponent.openModal();
+      
     
   }
 
