@@ -86,10 +86,16 @@ export class AppComponent {
         allDay: newEvent?.allDay
       };
 
+      
+      setTimeout(() => {calendarApi.getEvents()},5000)
+   
+
       INITIAL_EVENTS.push(eventToSave);
       this.modalComponent.eventData = eventToSave;
-      this.modalComponent.calendarApi = calendarApi;
+      // this.modalComponent.calendarApi = calendarApi;
+      this.modalComponent.calendarApi = newEvent;
       this.modalComponent.openModal();
+      
       
     
   }

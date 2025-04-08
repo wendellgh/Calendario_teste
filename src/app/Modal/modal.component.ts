@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter, viewChild, ViewChild } from '@a
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { INITIAL_EVENTS,  } from '../event-utils';
+import { INITIAL_EVENTS, } from '../event-utils';
 
 
 @Component({
@@ -17,12 +17,12 @@ export class ModalComponent {
   constructor() { }
 
   ngOnInit() {
-   
+
   }
 
   @Input() eventData!: any; //Posso criar uma classe e depois tipar para essa classe???
   @Input() calendarApi!: any;
- 
+
 
 
   isVisible = false;
@@ -40,17 +40,20 @@ export class ModalComponent {
       this.dataFinal = this.eventData.end.replace(/^(\d{4})-(\d{2})-(\d{2})$/, '$3/$2/$1');
     }
 
-    this.meunome();   
+    this.meunome();
 
   }
 
   closeModal() {
     this.isVisible = false;
-    console.log("Modal fechado");
+
     localStorage.setItem('events', JSON.stringify(INITIAL_EVENTS));
     this.calendarApi.get;
-    console.log(INITIAL_EVENTS)
-  
+
+    //Aqui os titulos ainda estão diferentes!
+    console.log(" Vindo do New Event: " + this.calendarApi.title)
+    console.log(" Vindo do Event to Save: " + this.eventData.title)
+
   }
 
 
@@ -60,14 +63,8 @@ export class ModalComponent {
     if (eventIndex !== -1) {
       // Atualiza o título do evento correspondente
       INITIAL_EVENTS[eventIndex].title = this.title2;
-
-      console.log(`Evento com ID ${this.eventData.id} atualizado com o título: ${this.title2}`);
-    } else {
-      console.warn(`Evento com ID ${this.eventData.id} não encontrado.`);
     }
-
-    console.log(this.title2 + " dps")
-   // Reseta o título para vazio após salvar
+    // Reseta o título para vazio após salvar
     this.title2 = '';
     this.meunome();
     this.closeModal();
