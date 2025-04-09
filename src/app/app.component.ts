@@ -61,6 +61,8 @@ export class AppComponent {
     },
     events: INITIAL_EVENTS,
     select: this.handleDateSelect.bind(this),
+    eventClick: this.handleEventClick.bind(this),
+    eventsSet:this.handleEvents.bind(this)
 
 
   })
@@ -86,9 +88,7 @@ export class AppComponent {
         allDay: newEvent?.allDay
       };
 
-      
-      setTimeout(() => {calendarApi.getEvents()},5000)
-   
+    
 
       INITIAL_EVENTS.push(eventToSave);
       this.modalComponent.eventData = eventToSave;
@@ -116,6 +116,5 @@ export class AppComponent {
   
   }
 
-  
   
 }
