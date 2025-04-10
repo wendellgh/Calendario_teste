@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, viewChild, ViewChild } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -22,7 +22,7 @@ export class ModalComponent {
 
   @Input() eventData!: any; //Posso criar uma classe e depois tipar para essa classe???
   @Input() calendarApi!: any;
-
+  allDay: boolean = false;
 
 
   isVisible = false;
@@ -35,6 +35,7 @@ export class ModalComponent {
 
   public openModal() {
     this.isVisible = true;
+
     if (this.eventData && this.eventData.start) {
       this.dataInicial = this.eventData.start.replace(/^(\d{4})-(\d{2})-(\d{2})$/, '$3/$2/$1');
       this.dataFinal = this.eventData.end.replace(/^(\d{4})-(\d{2})-(\d{2})$/, '$3/$2/$1');
@@ -46,6 +47,7 @@ export class ModalComponent {
 
   closeModal() {
     this.isVisible = false;
+    this.calendarApi = false;
 
     localStorage.setItem('events', JSON.stringify(INITIAL_EVENTS));
     this.calendarApi.get;
@@ -63,7 +65,21 @@ export class ModalComponent {
     if (eventIndex !== -1) {
       // Atualiza o título do evento correspondente
       INITIAL_EVENTS[eventIndex].title = this.title2;
+      INITIAL_EVENTS[eventIndex].allDay = this.allDay;
+
+
+      console.log(INITIAL_EVENTS)
     }
+
+ console.log( this.calendarApi.getEvents()); // Obtém todos os eventos
+    // const calendarEvent = events.find((event) => event.id === this.eventData.id); // Filtra pelo ID
+    // if (calendarEvent) {
+    //   console.log("Atualizando evento no FullCalendar...");
+    //   calendarEvent.setProp('title', this.title2); // Atualiza o título no calendário
+    //   calendarEvent.setProp('allDay', this.allDay); // Atualiza o estado allDay no calendário
+    // } else {
+    //   console.warn("Evento não encontrado no FullCalendar para o ID:", this.eventData.id);
+    // }
     // Reseta o título para vazio após salvar
     this.title2 = '';
     this.meunome();

@@ -68,8 +68,7 @@ export class AppComponent {
   })
   
   handleDateSelect(selectInfo: DateSelectArg) {
-    
-      
+  
       const calendarApi = selectInfo.view.calendar;
       
       const newEvent = calendarApi.addEvent({
@@ -88,16 +87,12 @@ export class AppComponent {
         allDay: newEvent?.allDay
       };
 
-    
-
       INITIAL_EVENTS.push(eventToSave);
       this.modalComponent.eventData = eventToSave;
-      // this.modalComponent.calendarApi = calendarApi;
+      this.modalComponent.calendarApi = calendarApi;
       this.modalComponent.calendarApi = newEvent;
       this.modalComponent.openModal();
       
-      
-    
   }
 
   handleEventClick(clickInfo: EventClickArg) {
