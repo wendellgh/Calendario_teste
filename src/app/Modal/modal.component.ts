@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { INITIAL_EVENTS, } from '../event-utils';
+import { log } from 'console';
 
 
 @Component({
@@ -22,9 +23,9 @@ export class ModalComponent {
 
   @Input() eventData!: any; //Posso criar uma classe e depois tipar para essa classe???
   @Input() calendarApi!: any;
+
+
   allDay: boolean = false;
-
-
   isVisible = false;
   dataInicial!: string;
   dataFinal!: string;
@@ -65,7 +66,7 @@ export class ModalComponent {
     if (eventIndex !== -1) {
       // Atualiza o título e o estado allDay no INITIAL_EVENTS
       INITIAL_EVENTS[eventIndex].title = this.title2;
-      INITIAL_EVENTS[eventIndex].allDay = this.allDay;
+      console.log(this.allDay)
 
       console.log("Evento atualizado no INITIAL_EVENTS:", INITIAL_EVENTS[eventIndex]);
     }
@@ -75,20 +76,22 @@ export class ModalComponent {
     if (calendarEvent) {
       console.log("Atualizando evento no FullCalendar...");
       calendarEvent.setProp('title', this.title2); // Atualiza o título no calendário
+      calendarEvent.setProp('allDay', this.allDay)
+      console.log(this.calendarApi)
 
-      // Converte as datas para o formato correto
-      const startDate = new Date(this.dataInicial.split('/').reverse().join('-'));
-      let endDate = new Date(this.dataFinal.split('/').reverse().join('-'));
+      // // Converte as datas para o formato correto
+      // const startDate = new Date(this.dataInicial.split('/').reverse().join('-'));
+      // let endDate = new Date(this.dataFinal.split('/').reverse().join('-'));
 
-      // Ajusta a data de fim para eventos allDay
-      if (this.allDay) {
-        // Incrementa 1 dia na data de fim para eventos allDay
-        endDate.setDate(endDate.getDate() + 1);
-        calendarEvent.setDates(startDate, endDate, { allDay: true });
-      } else {
-        // Mantém as datas originais para eventos que não são allDay
-        calendarEvent.setDates(startDate, endDate, { allDay: false });
-      }
+      // // Ajusta a data de fim para eventos allDay
+      // if (this.allDay) {
+      //   // Incrementa 1 dia na data de fim para eventos allDay
+      //   endDate.setDate(endDate.getDate() + 1);
+      //   calendarEvent.setDates(startDate, endDate, { allDay: true });
+      // } else {
+      //   // Mantém as datas originais para eventos que não são allDay
+      //   calendarEvent.setDates(startDate, endDate, { allDay: false });
+      // }
     } else {
       console.warn("Evento não encontrado no FullCalendar para o ID:", this.eventData.id);
     }

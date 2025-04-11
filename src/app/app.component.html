@@ -4,15 +4,8 @@
 
 <div class="container">
   <nav class="lista">
-    <h3>Navegação</h3>
+    <h3>Lista de Eventos:</h3>
     <ul>
-      <li>1</li>
-      <li>2</li>
-      <li>3</li>
-      <li>4
-        <app-modal (envio)="recebedofilho($event)"></app-modal>
-        {{nomeRecebido}}
-      </li>
       <li *ngFor="let event of eventsList">
         <p>{{event.title}}</p>
         <p>{{event.start}}</p>
