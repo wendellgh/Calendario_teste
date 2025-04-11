@@ -1,7 +1,7 @@
 import { Component, signal, ViewChild, viewChild, ChangeDetectorRef } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FullCalendarModule } from '@fullcalendar/angular';
-import { CalendarOptions } from '@fullcalendar/core/index.js';
+import { Calendar, CalendarOptions, EventInput } from '@fullcalendar/core/index.js';
 import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -32,14 +32,15 @@ export class AppComponent {
   title = 'Calendario_teste';
   calendarVisible = true;
   nomeRecebido: string = "";
-  
+
 
   currentEvents = signal<EventApi[]>([]);
+  eventsPromise = Promise<EventInput[]>;
 
-  constructor(private changeDetector: ChangeDetectorRef) {}
-  
-  ngOnInit(){
-  
+  constructor(private changeDetector: ChangeDetectorRef) { }
+
+  ngOnInit() {
+
   }
 
 
@@ -62,41 +63,47 @@ export class AppComponent {
     events: INITIAL_EVENTS,
     select: this.handleDateSelect.bind(this),
     eventClick: this.handleEventClick.bind(this),
-    eventsSet:this.handleEvents.bind(this)
-
+    eventsSet: this.handleEvents.bind(this),
+    eventChange(arg) {
+      
+    },
+    
 
   })
-  
+
   handleDateSelect(selectInfo: DateSelectArg) {
-  
-      const calendarApi = selectInfo.view.calendar;
-      
-      const newEvent = calendarApi.addEvent({
-        id: createEventId(),
-        title: this.nomeRecebido || '',
-        start: selectInfo.startStr,
-        end: selectInfo.endStr,
-        allDay: selectInfo.allDay
-      })
 
-      const eventToSave = {
-        id: newEvent?.id || '',
-        title: newEvent?.title || this.nomeRecebido,
-        start: newEvent?.startStr,
-        end: newEvent?.endStr,
-        allDay: newEvent?.allDay
-      };
+    const calendarApi = selectInfo.view.calendar;
 
-      INITIAL_EVENTS.push(eventToSave);
-      this.modalComponent.eventData = eventToSave;
-      this.modalComponent.calendarApi = calendarApi;
-      this.modalComponent.calendarApi = newEvent;
-      this.modalComponent.openModal();
-      
+    const newEvent = calendarApi.addEvent({
+      id: createEventId(),
+      title: this.nomeRecebido || '',
+      start: selectInfo.startStr,
+      end: selectInfo.endStr,
+      allDay: selectInfo.allDay
+    })
+
+    const eventToSave = {
+      id: newEvent?.id || '',
+      title: newEvent?.title || this.nomeRecebido,
+      start: newEvent?.startStr,
+      end: newEvent?.endStr,
+      allDay: newEvent?.allDay
+    };
+
+    calendarApi.refetchEvents()
+    INITIAL_EVENTS.push(eventToSave);
+    this.modalComponent.eventData = eventToSave;
+    this.modalComponent.calendarApi = calendarApi;
+
+    this.modalComponent.openModal();
+
+
   }
 
   handleEventClick(clickInfo: EventClickArg) {
     if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
+      console.log(clickInfo.event.id)
       clickInfo.event.remove();
     }
   }
@@ -108,8 +115,8 @@ export class AppComponent {
   handleEvents(events: EventApi[]) {
     this.currentEvents.set(events);
     this.changeDetector.detectChanges();
-  
+
   }
 
-  
+
 }
