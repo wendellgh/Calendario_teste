@@ -97,7 +97,7 @@ export class AppComponent {
     this.modalComponent.calendarApi = calendarApi;
 
     this.modalComponent.openModal();
-
+    //Ajustar para só salvar o evento ao final, acho que ajustando o event.click;
 
   }
 
