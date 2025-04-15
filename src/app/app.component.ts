@@ -1,7 +1,7 @@
 import { Component, signal, ViewChild, viewChild, ChangeDetectorRef } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FullCalendarModule } from '@fullcalendar/angular';
-import { Calendar, CalendarOptions, EventInput } from '@fullcalendar/core/index.js';
+import { CalendarOptions, EventInput } from '@fullcalendar/core/index.js';
 import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -12,6 +12,8 @@ import { ModalComponent } from './Modal/modal.component';
 import { INITIAL_EVENTS, createEventId } from './event-utils';
 import { DateSelectArg, EventClickArg, EventApi } from '@fullcalendar/core';
 import { CommonModule } from '@angular/common';
+import { EventosService, Evento } from './evento.service';
+
 
 
 
@@ -27,6 +29,18 @@ export class AppComponent {
 
   @ViewChild(ModalComponent) modalComponent!: ModalComponent;
 
+  constructor(private changeDetector: ChangeDetectorRef, private eventosService: EventosService) { }
+   eventos: Evento[] = []
+   TEST_EVT: EventInput[] = [];
+
+  ngOnInit() {
+    this.eventosService.getEventos().subscribe(data => {
+      this.eventos = data;
+      console.log('Eventos carregados:', this.eventos);
+    });
+  }
+
+  
   eventsList = INITIAL_EVENTS;
 
   title = 'Calendario_teste';
@@ -36,13 +50,6 @@ export class AppComponent {
 
   currentEvents = signal<EventApi[]>([]);
   eventsPromise = Promise<EventInput[]>;
-
-  constructor(private changeDetector: ChangeDetectorRef) { }
-
-  ngOnInit() {
-
-  }
-
 
   calendarOptions = signal<CalendarOptions>({
     initialView: 'dayGridMonth',
@@ -60,14 +67,14 @@ export class AppComponent {
       center: 'title',
       right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
     },
-    events: INITIAL_EVENTS,
+    events: this.TEST_EVT,
     select: this.handleDateSelect.bind(this),
     eventClick: this.handleEventClick.bind(this),
     eventsSet: this.handleEvents.bind(this),
     eventChange(arg) {
-      
+
     },
-    
+
 
   })
 
@@ -92,7 +99,8 @@ export class AppComponent {
     };
 
     calendarApi.refetchEvents()
-    INITIAL_EVENTS.push(eventToSave);
+    // INITIAL_EVENTS.push(eventToSave);
+    this.TEST_EVT.push(eventToSave);
     this.modalComponent.eventData = eventToSave;
     this.modalComponent.calendarApi = calendarApi;
 

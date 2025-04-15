@@ -1,0 +1,31 @@
+{
+    "eventos": [
+      {
+        "id": 1,
+        "title": "Evento 1",
+        "start": "2025-04-15",
+        "end": "2025-04-16",
+        "allDay": true
+      },
+      {
+        "id": 2,
+        "title": "Evento 2",
+        "start": "2025-04-17",
+        "end": "2025-04-18",
+        "allDay": false
+      },
+      {
+        "id": 3,
+        "title": "Evento 3 - Ainda estou aqui",
+        "start": "2025-04-17",
+        "end": "2025-04-18",
+        "allDay": false
+      },
+      {
+        "id": 9,
+        "title": "'Meu Teste'",
+        "start":"'2025-04-11'",
+        "end":"'2025-04-12'"
+      }
+    ]
+  }
