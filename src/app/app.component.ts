@@ -12,7 +12,8 @@ import { ModalComponent } from './Modal/modal.component';
 import { INITIAL_EVENTS, createEventId } from './event-utils';
 import { DateSelectArg, EventClickArg, EventApi } from '@fullcalendar/core';
 import { CommonModule } from '@angular/common';
-import { EventosService, Evento } from './evento.service';
+import { EventosService } from './evento.service';
+import { HttpClient } from '@angular/common/http';
 
 
 
@@ -29,24 +30,31 @@ export class AppComponent {
 
   @ViewChild(ModalComponent) modalComponent!: ModalComponent;
 
-  constructor(private changeDetector: ChangeDetectorRef, private eventosService: EventosService) { }
-   eventos: Evento[] = []
-   TEST_EVT: EventInput[] = [];
+  constructor(private changeDetector: ChangeDetectorRef, private eventosService: EventosService, private http: HttpClient) { }
+
+  TEST_EVT: EventInput[] = [];
+  outro_events: EventInput[] = [];
 
   ngOnInit() {
     this.eventosService.getEventos().subscribe(data => {
-      this.eventos = data;
-      console.log('Eventos carregados:', this.eventos);
+      this.TEST_EVT = data;
+
+      console.log('Eventos de test:', this.TEST_EVT);
     });
+
+
+
+
   }
 
-  
+
   eventsList = INITIAL_EVENTS;
+
+
 
   title = 'Calendario_teste';
   calendarVisible = true;
   nomeRecebido: string = "";
-
 
   currentEvents = signal<EventApi[]>([]);
   eventsPromise = Promise<EventInput[]>;
@@ -67,16 +75,29 @@ export class AppComponent {
       center: 'title',
       right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
     },
-    events: this.TEST_EVT,
     select: this.handleDateSelect.bind(this),
     eventClick: this.handleEventClick.bind(this),
     eventsSet: this.handleEvents.bind(this),
-    eventChange(arg) {
+    eventSources: [
+      {
+        events: INITIAL_EVENTS,
+        color: 'purple'
 
-    },
+      },
+      {
+        url: 'http://localhost:3000/eventos',
+        method: 'GET',
+        failure: () => {
+          console.error('Erro ao carregar eventos do db.json');
+        },
+        color: 'red'
 
+      }
+
+    ]
 
   })
+
 
   handleDateSelect(selectInfo: DateSelectArg) {
 
@@ -98,15 +119,15 @@ export class AppComponent {
       allDay: newEvent?.allDay
     };
 
-    calendarApi.refetchEvents()
-    // INITIAL_EVENTS.push(eventToSave);
+
+    INITIAL_EVENTS.push(eventToSave);
     this.TEST_EVT.push(eventToSave);
     this.modalComponent.eventData = eventToSave;
     this.modalComponent.calendarApi = calendarApi;
+    this.modalComponent.e_teste = this.TEST_EVT;
 
     this.modalComponent.openModal();
-
-
+   
   }
 
   handleEventClick(clickInfo: EventClickArg) {
@@ -126,5 +147,6 @@ export class AppComponent {
 
   }
 
+  
 
 }

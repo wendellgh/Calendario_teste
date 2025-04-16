@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { INITIAL_EVENTS, } from '../event-utils';
-import { log } from 'console';
+
+import { EventosService} from '../evento.service';
 
 
 @Component({
@@ -15,7 +16,7 @@ import { log } from 'console';
 })
 export class ModalComponent {
 
-  constructor() { }
+  constructor(private eventosService: EventosService) { }
 
   ngOnInit() {
 
@@ -30,6 +31,7 @@ export class ModalComponent {
   dataInicial!: string;
   dataFinal!: string;
   title2!: string;
+  e_teste!:any;
 
   @Output() envio = new EventEmitter<string>();
 
@@ -48,15 +50,7 @@ export class ModalComponent {
 
   closeModal() {
     this.isVisible = false;
-
     localStorage.setItem('events', JSON.stringify(INITIAL_EVENTS));
-
-    //Aqui os titulos ainda estão diferentes!
-    console.log(" Vindo do New Event: " + this.calendarApi.title)
-    console.log(" Vindo do Event to Save: " + this.eventData.title)
-    console.log(INITIAL_EVENTS)
-
-
   }
 
 
@@ -66,40 +60,24 @@ export class ModalComponent {
     if (eventIndex !== -1) {
       // Atualiza o título e o estado allDay no INITIAL_EVENTS
       INITIAL_EVENTS[eventIndex].title = this.title2;
-      console.log(this.allDay)
-
-      console.log("Evento atualizado no INITIAL_EVENTS:", INITIAL_EVENTS[eventIndex]);
     }
 
     // Busca o evento no FullCalendar
     const calendarEvent = this.calendarApi.getEvents().find((event: any) => event.id === this.eventData.id);
     if (calendarEvent) {
-      console.log("Atualizando evento no FullCalendar...");
-      calendarEvent.setProp('title', this.title2); // Atualiza o título no calendário
-      calendarEvent.setProp('allDay', this.allDay)
-      console.log(this.calendarApi)
+      calendarEvent.setProp('title', this.title2);
+      calendarEvent.setProp('allDay', this.allDay);
 
-      // // Converte as datas para o formato correto
-      // const startDate = new Date(this.dataInicial.split('/').reverse().join('-'));
-      // let endDate = new Date(this.dataFinal.split('/').reverse().join('-'));
-
-      // // Ajusta a data de fim para eventos allDay
-      // if (this.allDay) {
-      //   // Incrementa 1 dia na data de fim para eventos allDay
-      //   endDate.setDate(endDate.getDate() + 1);
-      //   calendarEvent.setDates(startDate, endDate, { allDay: true });
-      // } else {
-      //   // Mantém as datas originais para eventos que não são allDay
-      //   calendarEvent.setDates(startDate, endDate, { allDay: false });
-      // }
     } else {
       console.warn("Evento não encontrado no FullCalendar para o ID:", this.eventData.id);
     }
 
-    // Re-renderiza os eventos no calendário
     this.calendarApi.refetchEvents();
 
-    // Reseta o título para vazio após salvar
+    this.eventosService.addEventos(calendarEvent).subscribe((events => {this.e_teste.push(events)}));
+    
+    
+    
     this.title2 = '';
     this.meunome();
     this.closeModal();
