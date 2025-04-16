@@ -1,4 +1,5 @@
 import { EventInput } from '@fullcalendar/core';
+import { EventosService } from './evento.service';
 
 let eventGuid = 0;
 const TODAY_STR = new Date().toISOString().replace(/T.*$/, ''); // YYYY-MM-DD of today
@@ -34,6 +35,8 @@ export const INITIAL_EVENTS: EventInput[] = [
     end:'2025-04-30'
   }
 ];
+
+
 
 export function createEventId() {
   return String(eventGuid++);
