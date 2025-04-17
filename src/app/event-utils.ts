@@ -4,6 +4,7 @@ import { EventosService } from './evento.service';
 let eventGuid = 0;
 const TODAY_STR = new Date().toISOString().replace(/T.*$/, ''); // YYYY-MM-DD of today
 
+
 export const INITIAL_EVENTS: EventInput[] = [
   {
     id: createEventId(),
@@ -33,10 +34,22 @@ export const INITIAL_EVENTS: EventInput[] = [
     title: 'Wendell M.',
     start:'2025-04-30',
     end:'2025-04-30'
+  },
+  {
+    "id": "56",
+    "allDay": true,
+    "title": "sada",
+    "start": "2025-04-14",
+    "end": "2025-04-15"
+  },
+  {
+    "id": "69",
+    "allDay": true,
+    "title": "asdddddddddddd",
+    "start": "2025-04-22",
+    "end": "2025-04-23"
   }
 ];
-
-
 
 export function createEventId() {
   return String(eventGuid++);

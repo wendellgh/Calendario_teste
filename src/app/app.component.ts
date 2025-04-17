@@ -18,6 +18,7 @@ import { HttpClient } from '@angular/common/http';
 
 
 
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -35,23 +36,16 @@ export class AppComponent {
   TEST_EVT: EventInput[] = [];
   outro_events: EventInput[] = [];
 
+
   ngOnInit() {
     this.eventosService.getEventos().subscribe(data => {
       this.TEST_EVT = data;
-
-      console.log('Eventos de test:', this.TEST_EVT);
     });
-
-
-
-
   }
 
+  
 
   eventsList = INITIAL_EVENTS;
-
-
-
   title = 'Calendario_teste';
   calendarVisible = true;
   nomeRecebido: string = "";
@@ -82,20 +76,13 @@ export class AppComponent {
       {
         events: INITIAL_EVENTS,
         color: 'purple'
-
       },
       {
-        url: 'http://localhost:3000/eventos',
-        method: 'GET',
-        failure: () => {
-          console.error('Erro ao carregar eventos do db.json');
-        },
+        url: "http://localhost:3000/eventos",
+        method:"GET",
         color: 'red'
-
       }
-
     ]
-
   })
 
 
@@ -121,13 +108,13 @@ export class AppComponent {
 
 
     INITIAL_EVENTS.push(eventToSave);
-    this.TEST_EVT.push(eventToSave);
+
     this.modalComponent.eventData = eventToSave;
     this.modalComponent.calendarApi = calendarApi;
     this.modalComponent.e_teste = this.TEST_EVT;
 
     this.modalComponent.openModal();
-   
+
   }
 
   handleEventClick(clickInfo: EventClickArg) {
@@ -147,6 +134,6 @@ export class AppComponent {
 
   }
 
-  
+
 
 }

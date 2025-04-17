@@ -18,6 +18,7 @@ import {EventInput } from '@fullcalendar/core/index.js';
 
 export class EventosService {
   private apiUrl = 'http://localhost:3000/eventos'
+  
   constructor(private http: HttpClient) { }
 
   getEventos(): Observable<EventInput[]>{

@@ -72,8 +72,7 @@ export class ModalComponent {
       console.warn("Evento não encontrado no FullCalendar para o ID:", this.eventData.id);
     }
 
-    this.calendarApi.refetchEvents();
-
+    
     this.eventosService.addEventos(calendarEvent).subscribe((events => {this.e_teste.push(events)}));
     
     
@@ -81,6 +80,8 @@ export class ModalComponent {
     this.title2 = '';
     this.meunome();
     this.closeModal();
+    
+    this.calendarApi.refetchEvents();
   }
 
   cancel() {
