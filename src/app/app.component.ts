@@ -78,7 +78,7 @@ export class AppComponent {
         color: 'purple'
       },
       {
-        url: "http://localhost:3000/eventos",
+        url: "./db.json",
         method:"GET",
         color: 'red'
       }

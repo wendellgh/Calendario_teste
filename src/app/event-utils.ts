@@ -45,7 +45,7 @@ export const INITIAL_EVENTS: EventInput[] = [
   {
     "id": "69",
     "allDay": true,
-    "title": "asdddddddddddd",
+    "title": "Da APi",
     "start": "2025-04-22",
     "end": "2025-04-23"
   }

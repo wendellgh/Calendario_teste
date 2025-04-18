@@ -1,5 +1,8 @@
 # CalendarioTeste
 
+## Instalando dependências
+npm install
+
 
 
 ## Development server
@@ -12,7 +15,12 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The appli
 
 ## Start server API Mock
 
+### Install Json-Server
+
+``` bash
+    npm install json-server
+```
+
 ```bash
     json-server --watch db.json
 ```
-
