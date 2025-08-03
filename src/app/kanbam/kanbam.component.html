@@ -1,0 +1,57 @@
+<h1>AINDA ESTOU AQUI. 02</h1>
+
+<ngx-rt [items]="items" [periods]="periods" [sections]="sections" [events]="events" [showBusinessDayOnly]="false"
+    [allowDragging]="true"></ngx-rt>
+
+
+<h2>CDK</h2>
+
+<mat-toolbar color="primary">Kanban Simples</mat-toolbar>
+
+<div class="kanban-container">
+
+    <mat-card class="kanban-column">
+        <mat-card-title>To Do</mat-card-title>
+        <mat-divider></mat-divider>
+        <div cdkDropList 
+        id="todoList" 
+        [cdkDropListData]="todo"
+        [cdkDropListConnectedTo]="['doingList', 'doneList']" 
+        class="list" 
+        (cdkDropListDropped)="drop($event)">
+            <mat-card class="task-card" *ngFor="let task of todo" cdkDrag>
+                {{ task.title }}
+            </mat-card>
+        </div>
+    </mat-card>
+
+    <mat-card class="kanban-column">
+        <mat-card-title>Doing</mat-card-title>
+        <mat-divider></mat-divider>
+        <div cdkDropList 
+        id="doingList" 
+        [cdkDropListData]="doing"
+        [cdkDropListConnectedTo]="['todoList', 'doneList']" 
+        class="list" 
+        (cdkDropListDropped)="drop($event)">
+            <mat-card class="task-card" *ngFor="let task of doing" cdkDrag>
+                {{ task.title }}
+            </mat-card>
+        </div>
+    </mat-card>
+
+    <mat-card class="kanban-column">
+        <mat-card-title>Done</mat-card-title>
+        <mat-divider></mat-divider>
+        <div cdkDropList 
+        id="doneList" 
+        [cdkDropListData]="done"
+        [cdkDropListConnectedTo]="['todoList', 'doingList']" 
+        class="list"
+        (cdkDropListDropped)="drop($event)">
+            <mat-card class="task-card" *ngFor="let task of done" cdkDrag>
+                {{ task.title }}
+            </mat-card>
+        </div>
+    </mat-card>
+</div>

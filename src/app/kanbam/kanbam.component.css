@@ -1,0 +1,53 @@
+:host {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+
+.timeline-title {
+  margin: 1rem;
+  font-weight: 600;
+}
+
+.kanban-container {
+  display: flex;
+  gap: 1rem;
+  margin: 1rem;
+}
+
+.kanban-column {
+  flex: 1;
+  background-color: #fafafa;
+  display: flex;
+  flex-direction: column;
+  height: 400px;
+  border-radius: 8px;
+  padding: 0.5rem;
+  width: 300px;
+  /* ou o que fizer sentido */
+  min-height: 400px;
+  /* garantir espaço para dropar */
+  margin: 0 10px;
+}
+
+.list {
+  flex: 1;
+  overflow-y: auto;
+  border: 1px dashed #ccc;
+  border-radius: 4px;
+  padding: 0.5rem;
+  background: white;
+  margin-top: 0.5rem;
+}
+
+.task-card {
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  background: #e0e0e0;
+  border-radius: 4px;
+  cursor: grab;
+  user-select: none;
+}

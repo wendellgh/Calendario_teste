@@ -17,10 +17,10 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The appli
 
 ### Install Json-Server
 
-``` bash
+``` bash para instalar
     npm install json-server
 ```
 
-```bash
+```bash para executar
     json-server --watch db.json
 ```
