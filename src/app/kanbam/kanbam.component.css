@@ -1,9 +1,16 @@
 :host {
-  display: block;
-  width: 100vw;
-  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  
+  width: 80vw;
   min-height: 100vh;
-  box-sizing: border-box;
+  
+  margin: 0 1%;
+}
+h2,h1{
+  margin-top: 40px;
+  align-items: start;
+  justify-content: baseline;
 }
 
 
@@ -15,7 +22,11 @@
 .kanban-container {
   display: flex;
   gap: 1rem;
-  margin: 1rem;
+  margin: 1rem auto;
+  justify-content: center;
+  align-items: flex-start;
+  justify-content: center;
+  align-items: center;
 }
 
 .kanban-column {
