@@ -1,8 +1,10 @@
 import { Routes } from '@angular/router';
-import { AppComponent } from './app.component';
+import { CalendarioComponent } from './calendario/calendario.component';
 import { KanbamComponent } from './kanbam/kanbam.component';
+import {ModalAddTaskComponent} from './kanbam/modal-add-task/modal-add-task.component';
 
 export const routes: Routes = [
-    // {path: '', component: AppComponent, pathMatch: 'full'},
-    {path: 'kanbam', component: KanbamComponent}
+    {path: '', component: CalendarioComponent, pathMatch: 'full'},
+    {path: 'kanbam', component: KanbamComponent},
+    {path:'add', component: ModalAddTaskComponent}
 ];

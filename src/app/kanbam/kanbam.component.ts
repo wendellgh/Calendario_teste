@@ -114,22 +114,23 @@ export class KanbamComponent implements OnInit {
 
   // TENTANDO USAR O CDK ====================================
 
-
-
-
+  addTarefa(){
+    this.todo.push({ id: 89, title: "tarefa 55", state: "todo", descricao: "Olá mundo" });
+  }
 
   todo: TaskEstado[] = [
-    { id: 1, title: 'Tarefa 1', state: 'todo' },
-    { id: 2, title: 'Tarefa 2', state: 'todo' },
-    { id: 3, title: 'Tarefa 3', state: 'todo' }
+    { id: 1, title: 'Tarefa 1', state: 'todo', descricao: "O está sendo feito" },
+    { id: 2, title: 'Tarefa 2', state: 'todo', descricao: "O está sendo feito" },
+    { id: 3, title: 'Tarefa 3', state: 'todo', descricao: "O está sendo feito" }
   ];
 
   doing: TaskEstado[] = [
-    { id: 4, title: 'Tarefa 4', state: 'doing' }
+    { id: 4, title: 'Tarefa 4', state: 'doing', descricao: "O está sendo feito" }
   ];
 
   done: TaskEstado[] = [
-    { id: 5, title: 'Tarefa 5', state: 'done' }
+    { id: 5, title: 'Tarefa 5', state: 'done', descricao: "O está sendo feito" },
+    {id:6, title:'Criando direto no Code', state: 'done', descricao: "O está sendo feito"}
   ];
 
   drop(event: CdkDragDrop<TaskEstado[]>) {

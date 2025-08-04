@@ -1,0 +1,49 @@
+    .container {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        height: 80vh;
+        
+    }
+
+    .lista {
+        background-color: #f4f4f4;
+        padding: 10px;
+        overflow-y: auto;
+        
+
+    }
+
+    .lista ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .lista ul li {
+        margin: 10px 0;
+
+    }
+
+    .calendar section {
+        padding: 20px;
+        padding-bottom: 0px;
+        background-color: #fff;
+        height: 100%; 
+        box-sizing: border-box;
+
+
+    }
+
+    .calendar {
+        text-transform: uppercase;
+        font-size: 12px;
+        margin: 15px;
+    }
+
+    h2 {
+        margin: 0;
+        color: #FE001A;
+    }
+
+    .lista h3 {
+        margin: 0;
+    }

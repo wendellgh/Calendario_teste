@@ -1,3 +1,4 @@
+
 import { Component, signal, ViewChild, viewChild, ChangeDetectorRef } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FullCalendarModule } from '@fullcalendar/angular';
@@ -8,26 +9,21 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 import localePtBr from '@fullcalendar/core/locales/pt-br'
 
-import { ModalComponent } from './Modal/modal.component';
-import { INITIAL_EVENTS, createEventId } from './event-utils';
+import { ModalComponent } from '../Modal/modal.component';
+import { INITIAL_EVENTS, createEventId } from '../event-utils';
 import { DateSelectArg, EventClickArg, EventApi } from '@fullcalendar/core';
 import { CommonModule } from '@angular/common';
-import { EventosService } from './evento.service';
+import { EventosService } from '../evento.service';
 import { HttpClient } from '@angular/common/http';
 
-
-
-
-
 @Component({
-  selector: 'app-root',
+  selector: 'app-calendario',
   standalone: true,
-  imports: [RouterOutlet, FullCalendarModule, CommonModule],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  imports: [FullCalendarModule, ModalComponent, CommonModule],
+  templateUrl: './calendario.component.html',
+  styleUrl: './calendario.component.css'
 })
-
-export class AppComponent {
+export class CalendarioComponent {
 
   @ViewChild(ModalComponent) modalComponent!: ModalComponent;
 
@@ -133,7 +129,5 @@ export class AppComponent {
     this.changeDetector.detectChanges();
 
   }
-
-
 
 }

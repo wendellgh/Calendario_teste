@@ -1,0 +1,7 @@
+<p>modal-add-task works!</p>
+
+<form [formGroup]="adicioandoTask" (ngSubmit)="submitForm()">
+    <input type="text" formControlName="primeiraEntrada" placeholder="Digite ...">
+
+    <button type="submit">Adicionar</button>
+</form>

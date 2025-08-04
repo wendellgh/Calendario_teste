@@ -8,53 +8,58 @@
 <h2>CDK</h2>
 
 <mat-toolbar color="primary">Kanban Simples</mat-toolbar>
+<div>
 
-<div class="kanban-container">
+    <button class=" botaoAdd" (click)="addTarefa()">Adicionar Tarefa</button>
 
-    <mat-card class="kanban-column">
-        <mat-card-title>To Do</mat-card-title>
-        <mat-divider></mat-divider>
-        <div cdkDropList 
-        id="todoList" 
-        [cdkDropListData]="todo"
-        [cdkDropListConnectedTo]="['doingList', 'doneList']" 
-        class="list" 
-        (cdkDropListDropped)="drop($event)">
-            <mat-card class="task-card" *ngFor="let task of todo" cdkDrag>
-                {{ task.title }}
-            </mat-card>
-        </div>
-    </mat-card>
+    <div class="kanban-container">
+        <mat-card class="kanban-column">
+            <mat-card-title>A fazer</mat-card-title>
+            <mat-divider></mat-divider>
+            <div cdkDropList id="todoList" [cdkDropListData]="todo" [cdkDropListConnectedTo]="['doingList', 'doneList']"
+                class="list" (cdkDropListDropped)="drop($event)">
+                <mat-card class="task-card" *ngFor="let task of todo" cdkDrag>
+                    <Span class="tituloSpan">
+                        {{ task.title }}
+                    </Span>
+                    <Span class="descricaoSpan">
+                        {{ task.descricao }}
+                    </Span>
+                </mat-card>
+            </div>
+        </mat-card>
 
-    <mat-card class="kanban-column">
-        <mat-card-title>Doing</mat-card-title>
-        <mat-divider></mat-divider>
-        <div cdkDropList 
-        id="doingList" 
-        [cdkDropListData]="doing"
-        [cdkDropListConnectedTo]="['todoList', 'doneList']" 
-        class="list" 
-        (cdkDropListDropped)="drop($event)">
-            <mat-card class="task-card" *ngFor="let task of doing" cdkDrag>
-                {{ task.title }}
-            </mat-card>
-        </div>
-    </mat-card>
+        <mat-card class="kanban-column">
+            <mat-card-title>Em Progresso</mat-card-title>
+            <mat-divider></mat-divider>
+            <div cdkDropList id="doingList" [cdkDropListData]="doing"
+                [cdkDropListConnectedTo]="['todoList', 'doneList']" class="list" (cdkDropListDropped)="drop($event)">
+                <mat-card class="task-card" *ngFor="let task of doing" cdkDrag>
+                   <Span class="tituloSpan">
+                        {{ task.title }}
+                    </Span>
+                    <Span class="descricaoSpan">
+                        {{ task.descricao }}
+                    </Span>
+                </mat-card>
+            </div>
+        </mat-card>
 
-    <mat-card class="kanban-column">
-        <mat-card-title>Done</mat-card-title>
-        <mat-divider></mat-divider>
-        <div cdkDropList 
-        id="doneList" 
-        [cdkDropListData]="done"
-        [cdkDropListConnectedTo]="['todoList', 'doingList']" 
-        class="list"
-        (cdkDropListDropped)="drop($event)">
-            <mat-card class="task-card" *ngFor="let task of done" cdkDrag>
-                {{ task.title }}
-            </mat-card>
-        </div>
-    </mat-card>
+        <mat-card class="kanban-column">
+            <mat-card-title>Finalizado</mat-card-title>
+            <mat-divider></mat-divider>
+            <div cdkDropList id="doneList" [cdkDropListData]="done" [cdkDropListConnectedTo]="['todoList', 'doingList']"
+                class="list" (cdkDropListDropped)="drop($event)">
+                <mat-card class="task-card" *ngFor="let task of done" cdkDrag>
+                    <Span class="tituloSpan">
+                        {{ task.title }}
+                    </Span>
+                    <Span class="descricaoSpan">
+                        {{ task.descricao }}
+                    </Span>
+
+                </mat-card>
+            </div>
+        </mat-card>
+    </div>
 </div>
-
-
