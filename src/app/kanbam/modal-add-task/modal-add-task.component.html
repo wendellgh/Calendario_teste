@@ -1,7 +1,50 @@
 <p>modal-add-task works!</p>
 
 <form [formGroup]="adicioandoTask" (ngSubmit)="submitForm()">
-    <input type="text" formControlName="primeiraEntrada" placeholder="Digite ...">
+    <input type="text" formControlName="id" placeholder="Digite id ...">
+    <input type="text" formControlName="titulo" placeholder="Digite titulo ...">
+    <input type="text" formControlName="descricao" placeholder="Digite descrição  ...">
+    <!-- <input type="text" formControlName="terceiraEntrada" placeholder="Digite estado ...">
+      -->
 
     <button type="submit">Adicionar</button>
 </form>
+
+<div *ngFor="let dsc of addObjeto">
+    {{dsc.id}} / {{dsc.titulo}} / {{dsc.estado}} / {{dsc.descricao}}
+</div>
+
+
+<div class="kanban-container">
+        <mat-card class="kanban-column">
+            <mat-card-title>A fazer</mat-card-title>
+            <mat-divider></mat-divider>
+            <div cdkDropList id="todoList" [cdkDropListData]="addObjeto" [cdkDropListConnectedTo]="['doingList', 'doneList']"
+                class="list" (cdkDropListDropped)="drop($event)">
+                <mat-card class="task-card" *ngFor="let task of addObjeto" cdkDrag>
+                    <Span class="tituloSpan">
+                        {{ task.titulo }}
+                    </Span>
+                    <Span class="descricaoSpan">
+                        {{ task.descricao }}
+                    </Span>
+                </mat-card>
+            </div>
+        </mat-card>
+
+        <mat-card class="kanban-column">
+            <mat-card-title>Em Progresso</mat-card-title>
+            <mat-divider></mat-divider>
+            <div cdkDropList id="doingList" [cdkDropListData]="fazendo"
+                [cdkDropListConnectedTo]="['todoList', 'doneList']" class="list" (cdkDropListDropped)="drop($event)">
+                <mat-card class="task-card" *ngFor="let task of fazendo" cdkDrag>
+                   <Span class="tituloSpan">
+                        {{ task.titulo }}
+                    </Span>
+                    <Span class="descricaoSpan">
+                        {{ task.descricao }}
+                    </Span>
+                </mat-card>
+            </div>
+        </mat-card>
+    </div>
