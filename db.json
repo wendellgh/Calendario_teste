@@ -213,5 +213,11 @@
       "start": "2025-08-20",
       "end": "2025-08-21"
     }
+  ],
+  "tasks":[
+    {"id": 1,
+      "titulo": "Minha primeira tarefa",
+      "descricao": "Fazer algo importante",
+      "status": "todo"}
   ]
 }
