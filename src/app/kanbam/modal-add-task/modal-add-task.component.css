@@ -25,6 +25,7 @@ h1 {
   font-weight: 600;
 }
 
+
 .kanban-container {
   display: flex;
   gap: 1rem;
@@ -70,9 +71,9 @@ h1 {
   user-select: none;
   width: 180px;
   height: 150px;
-  
-  
-  
+
+
+
 }
 
 .botaoAdd{
@@ -85,4 +86,66 @@ h1 {
 }
 .descricaoSpan{
   color: red;
+}
+
+
+/* Menu */
+
+:host .menu-retra button{
+border: 10px solid pink;
+display: inline;
+}
+
+:host .menu-retra mat-icon{
+  /* background-color: red; */
+ margin: 0px;
+  border: solid 3px forestgreen;
+
+
+}
+
+:host .menu-text {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+
+}
+:host .menu-button {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* espaço entre ícone e texto */
+  border: 10px solid red;
+  width: 100%;
+
+}
+
+
+.menu-retra{
+border: 4px solid red;
+  width: 100%;
+  justify-content: space-between;
+  margin: 0px;
+}
+
+mat-sidenav-container {
+  height: 10vh;
+}
+
+
+
+.container {
+  height: 50vh;
+}
+
+.sidenav {
+  width: 240px;
+  padding: 16px;
+}
+
+.logo {
+  margin-bottom: 16px;
+}
+
+.content {
+  padding: 24px;
 }
