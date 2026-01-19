@@ -88,31 +88,3 @@
 
 
 
-<div class="burguer">
-  <mat-sidenav-container class="container">
-    <mat-sidenav mode='over' #sidenav closed class="sidenav">
-      <h3 class="logo">
-        Dashbord
-      </h3>
-      <button mat-icon-button (click)="sidenav.toggle()">
-        <mat-icon click>close</mat-icon>
-      </button>
-      <a mat-button>home</a>
-      <a mat-button>app</a>
-      <a mat-button>add</a>
-
-    </mat-sidenav>
-
-
-    <!-- Body -->
-    <mat-sidenav-content>
-      <mat-toolbar color="primary">
-        <button mat-icon-button (click)="sidenav.toggle()">
-          <mat-icon>menu</mat-icon>
-        </button>
-        <span class="title">Meu Sistema</span>
-      </mat-toolbar>
-    </mat-sidenav-content>
-
-  </mat-sidenav-container>
-</div>

@@ -16,7 +16,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 @Component({
   selector: 'app-modal-add-task',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, DragDropModule, MatCardModule, MatDividerModule, MatToolbarModule, MatButtonModule, MatIconModule, MatMenuModule,  MatSidenavModule,],
+  imports: [ReactiveFormsModule, CommonModule, DragDropModule, MatCardModule, MatDividerModule, MatToolbarModule, MatButtonModule, MatIconModule, MatMenuModule,  MatSidenavModule],
   templateUrl: './modal-add-task.component.html',
   styleUrl: './modal-add-task.component.css'
 })
