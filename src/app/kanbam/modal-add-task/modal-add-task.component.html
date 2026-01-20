@@ -1,6 +1,42 @@
 <p>modal-add-task works!</p>
+<div>
+  <mat-toolbar>
 
-<form [formGroup]="adicioandoTask" (ngSubmit)="submitForm()">
+    <div class="menu-retra">
+      <button [matMenuTriggerFor]="opcoes" mat-icon-button class="example-icon">
+        <mat-icon>menu
+        </mat-icon>
+        <span class="menu-text">
+          MINHAS OPÇÕES
+        </span>
+      </button>
+
+    </div>
+    <mat-menu #opcoes="matMenu">
+      <button mat-menu-item [matMenuTriggerFor]="primeira">1° opção</button>
+      <button mat-menu-item [matMenuTriggerFor]="segunda">2° opção</button>
+      <button mat-menu-item [matMenuTriggerFor]="terceira">3° opção</button>
+    </mat-menu>
+
+    <mat-menu #primeira>
+      <button mat-menu-item>1° opção</button>
+
+    </mat-menu>
+    <mat-menu #segunda>
+      <button mat-menu-item>2° opção</button>
+      <button mat-menu-item>2° opção</button>
+    </mat-menu>
+    <mat-menu #terceira>
+      <button mat-menu-item>3° opção</button>
+      <button mat-menu-item>3° opção</button>
+      <button mat-menu-item>3° opção</button>
+    </mat-menu>
+  </mat-toolbar>
+</div>
+
+
+<div>
+  <form [formGroup]="adicioandoTask" (ngSubmit)="submitForm()">
     <input type="text" formControlName="id" placeholder="Digite id ...">
     <input type="text" formControlName="titulo" placeholder="Digite titulo ...">
     <input type="text" formControlName="descricao" placeholder="Digite descrição  ...">
@@ -8,43 +44,47 @@
       -->
 
     <button type="submit">Adicionar</button>
-</form>
+  </form>
 
-<div *ngFor="let dsc of addObjeto">
+  <div *ngFor="let dsc of addObjeto">
     {{dsc.id}} / {{dsc.titulo}} / {{dsc.estado}} / {{dsc.descricao}}
+  </div>
+
+
+  <div class="kanban-container">
+    <mat-card class="kanban-column">
+      <mat-card-title>A fazer</mat-card-title>
+      <mat-divider></mat-divider>
+      <div cdkDropList id="todoList" [cdkDropListData]="addObjeto" [cdkDropListConnectedTo]="['doingList', 'doneList']"
+        class="list" (cdkDropListDropped)="drop($event)">
+        <mat-card class="task-card" *ngFor="let task of addObjeto" cdkDrag>
+          <Span class="tituloSpan">
+            {{ task.titulo }}
+          </Span>
+          <Span class="descricaoSpan">
+            {{ task.descricao }}
+          </Span>
+        </mat-card>
+      </div>
+    </mat-card>
+
+    <mat-card class="kanban-column">
+      <mat-card-title>Em Progresso</mat-card-title>
+      <mat-divider></mat-divider>
+      <div cdkDropList id="doingList" [cdkDropListData]="fazendo" [cdkDropListConnectedTo]="['todoList', 'doneList']"
+        class="list" (cdkDropListDropped)="drop($event)">
+        <mat-card class="task-card" *ngFor="let task of fazendo" cdkDrag>
+          <Span class="tituloSpan">
+            {{ task.titulo }}
+          </Span>
+          <Span class="descricaoSpan">
+            {{ task.descricao }}
+          </Span>
+        </mat-card>
+      </div>
+    </mat-card>
+  </div>
 </div>
 
 
-<div class="kanban-container">
-        <mat-card class="kanban-column">
-            <mat-card-title>A fazer</mat-card-title>
-            <mat-divider></mat-divider>
-            <div cdkDropList id="todoList" [cdkDropListData]="addObjeto" [cdkDropListConnectedTo]="['doingList', 'doneList']"
-                class="list" (cdkDropListDropped)="drop($event)">
-                <mat-card class="task-card" *ngFor="let task of addObjeto" cdkDrag>
-                    <Span class="tituloSpan">
-                        {{ task.titulo }}
-                    </Span>
-                    <Span class="descricaoSpan">
-                        {{ task.descricao }}
-                    </Span>
-                </mat-card>
-            </div>
-        </mat-card>
 
-        <mat-card class="kanban-column">
-            <mat-card-title>Em Progresso</mat-card-title>
-            <mat-divider></mat-divider>
-            <div cdkDropList id="doingList" [cdkDropListData]="fazendo"
-                [cdkDropListConnectedTo]="['todoList', 'doneList']" class="list" (cdkDropListDropped)="drop($event)">
-                <mat-card class="task-card" *ngFor="let task of fazendo" cdkDrag>
-                   <Span class="tituloSpan">
-                        {{ task.titulo }}
-                    </Span>
-                    <Span class="descricaoSpan">
-                        {{ task.descricao }}
-                    </Span>
-                </mat-card>
-            </div>
-        </mat-card>
-    </div>
